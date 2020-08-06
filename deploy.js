@@ -71,7 +71,7 @@ function makeNewProject() {
 }
 
 function updateRemoteApp() {
-    // makeNewProject();
+    makeNewProject();
     return ssh.execCommand(
         'cp -r starter-node-angular-list-temp/* starter-node-angular-list/ && rm -rf starter-node-angular-list-temp', {
         cwd: '/home/ubuntu'
