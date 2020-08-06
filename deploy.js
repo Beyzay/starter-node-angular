@@ -22,8 +22,8 @@ function installPM2() {
 // transfers local project to the remote server
 function transferProjectToRemote(failed, successful) {
     return ssh.putDirectory(
-        '../starter-node-angular-list',
-        '/home/ubuntu/starter-node-angular-list-temp',
+        '../starter-node-angular',
+        '/home/ubuntu/starter-node-angular-temp',
         {
             recursive: true,
             concurrency: 1,
@@ -49,7 +49,7 @@ function transferProjectToRemote(failed, successful) {
 // creates a temporary folder on the remote server
 function createRemoteTempFolder() {
     return ssh.execCommand(
-        'rm -rf starter-node-angular-list-temp && mkdir starter-node-angular-list-temp', {
+        'rm -rf starter-node-angular-temp && mkdir starter-node-angular-temp', {
         cwd: '/home/ubuntu'
     });
 }
@@ -65,7 +65,7 @@ function stopRemoteServices() {
 // updates the project source on the server
 function makeNewProject() {
     return ssh.execCommand(
-        'mkdir starter-node-angular-list', {
+        'mkdir starter-node-angular', {
         cwd: '/home/ubuntu'
     });
 }
@@ -73,7 +73,7 @@ function makeNewProject() {
 function updateRemoteApp() {
     makeNewProject();
     return ssh.execCommand(
-        'cp -r starter-node-angular-list-temp/* starter-node-angular-list/ && rm -rf starter-node-angular-list-temp', {
+        'cp -r starter-node-angular-temp/* starter-node-angular/ && rm -rf starter-node-angular-temp', {
         cwd: '/home/ubuntu'
     });
 }
@@ -81,7 +81,7 @@ function updateRemoteApp() {
 // restart mongodb and node services on the remote server
 function restartRemoteServices() {
     return ssh.execCommand(
-        'cd starter-node-angular-list && sudo service mongod start && pm2 start app.js', {
+        'cd starter-node-angular && sudo service mongod start && pm2 start app.js', {
         cwd: '/home/ubuntu'
     });
 }
@@ -103,7 +103,7 @@ function sshConnect() {
             return installPM2();
         })
         .then(function () {
-            console.log('Creating `starter-node-angular-list-temp` folder.');
+            console.log('Creating `starter-node-angular-temp` folder.');
             return createRemoteTempFolder();
         })
         .then(function (result) {
