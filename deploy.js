@@ -93,11 +93,7 @@ function sshConnect() {
     ssh
         .connect({
             // TODO: ADD YOUR IP ADDRESS BELOW (e.g. '12.34.5.67')
-<<<<<<< HEAD
             host: '34.232.70.112',
-=======
-            host: '54.90.60.51',
->>>>>>> 2ee9301b520bbe77d739e450dd38e5150dd28d87
             username: 'ubuntu',
             privateKey: 'sna-key.pem'
         })
